@@ -1,3 +1,4 @@
+import { VideoComponent } from "./components/page/item/video";
 import "../style/style.css";
 import { PageComponent } from "./components/page/page";
 import { ImageComponent } from "./components/page/item/image";
@@ -15,6 +16,12 @@ class App {
       "https://picsum.photos/600/300"
     );
     image.attachTo(appRoot, "beforeend");
+
+    const video = new VideoComponent(
+      "Video Title",
+      "https://youtu.be/5qap5aO4i9A"
+    );
+    video.attachTo(appRoot, "beforeend");
 
     const note = new NoteComponent("Note Title", "Note Body");
     note.attachTo(appRoot, "beforeend");
