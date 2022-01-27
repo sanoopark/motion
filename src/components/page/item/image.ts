@@ -6,7 +6,7 @@ export class ImageComponent extends BaseComponent<HTMLElement> {
       <section class="image">
         <div class="image__holder">
           <img class="image__thumnail" />
-          <p class="image__title"></p>
+          <h2 class="image__title"></p>
         </div>
       </section>
     `);
