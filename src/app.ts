@@ -4,13 +4,16 @@ import { ImageComponent } from "./components/page/item/image";
 import { VideoComponent } from "./components/page/item/video";
 import { NoteComponent } from "./components/page/item/note";
 import { TodoComponent } from "./components/page/item/todo";
-import { PageComponent } from "./components/page/page";
-import { Composable } from "./components/page/page";
+import {
+  Composable,
+  PageComponent,
+  PageItemComponent,
+} from "./components/page/page";
 
 class App {
   private readonly page: Component & Composable;
   constructor(appRoot: HTMLElement) {
-    this.page = new PageComponent();
+    this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
 
     const image = new ImageComponent(
