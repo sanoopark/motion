@@ -1,6 +1,10 @@
+import { MediaData } from "@/app";
 import { BaseComponent } from "@/components/component";
 
-export class MediaSectionInput extends BaseComponent<HTMLElement> {
+export class MediaSectionInput
+  extends BaseComponent<HTMLElement>
+  implements MediaData
+{
   constructor() {
     super(`
       <div>

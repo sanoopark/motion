@@ -1,6 +1,10 @@
+import { TextData } from "@/app";
 import { BaseComponent } from "@/components/component";
 
-export class TextSectionInput extends BaseComponent<HTMLElement> {
+export class TextSectionInput
+  extends BaseComponent<HTMLElement>
+  implements TextData
+{
   constructor() {
     super(`
       <div>
