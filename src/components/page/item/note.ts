@@ -1,4 +1,4 @@
-import { BaseComponent } from "./../../component";
+import { BaseComponent } from "@/components/component";
 
 export class NoteComponent extends BaseComponent<HTMLElement> {
   constructor(title: string, body: string) {

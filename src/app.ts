@@ -56,7 +56,7 @@ class App {
       (input: TextSectionInput) => new TodoComponent(input.title, input.body)
     );
 
-    // For demo :)
+    // For demo
     this.page.addChild(
       new ImageComponent("Image Title", "https://picsum.photos/800/400")
     );
@@ -85,6 +85,7 @@ class App {
     makeSection: (input: T) => Component
   ) {
     const element = document.querySelector(selector)! as HTMLButtonElement;
+
     element.addEventListener("click", () => {
       const dialog = new InputDialog();
       const inputSection = new InputComponent();

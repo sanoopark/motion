@@ -1,8 +1,4 @@
-import { BaseComponent, Component } from "./../component";
-
-export interface Composable {
-  addChild(child: Component): void;
-}
+import { BaseComponent, Component } from "@/components/component";
 
 type OnCloseListener = () => void;
 type DragState = "start" | "stop" | "enter" | "leave";
@@ -10,7 +6,13 @@ type OnDragStateListener<T extends Component> = (
   target: T,
   state: DragState
 ) => void;
+type SectionContainerConstructor = {
+  new (): SectionContainer;
+};
 
+export interface Composable {
+  addChild(child: Component): void;
+}
 interface SectionContainer extends Component, Composable {
   setOnCloseListener(listner: OnCloseListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
@@ -19,16 +21,13 @@ interface SectionContainer extends Component, Composable {
   onDropped(): void;
 }
 
-type SectionContainerConstructor = {
-  new (): SectionContainer;
-};
-
 export class PageItemComponent
   extends BaseComponent<HTMLElement>
   implements SectionContainer
 {
   private closeListener?: OnCloseListener;
   private dragStateListener?: OnDragStateListener<PageItemComponent>;
+
   constructor() {
     super(`
       <li draggable="true" class="page-item">
@@ -38,19 +37,25 @@ export class PageItemComponent
         </div>
       </li>
     `);
+
     const closeBtn = this.element.querySelector(".close")! as HTMLButtonElement;
+
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
     };
+
     this.element.addEventListener("dragstart", (event: DragEvent) => {
       this.onDragStart(event);
     });
+
     this.element.addEventListener("dragend", (event: DragEvent) => {
       this.onDragEnd(event);
     });
+
     this.element.addEventListener("dragenter", (event: DragEvent) => {
       this.onDragEnter(event);
     });
+
     this.element.addEventListener("dragleave", (event: DragEvent) => {
       this.onDragLeave(event);
     });
@@ -111,6 +116,7 @@ export class PageItemComponent
     return this.element.getBoundingClientRect();
   }
 }
+
 export class PageComponent
   extends BaseComponent<HTMLUListElement>
   implements Composable
@@ -118,12 +124,14 @@ export class PageComponent
   private children = new Set<SectionContainer>();
   private dropTarget?: SectionContainer;
   private dragTarget?: SectionContainer;
+
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page"></ul>');
 
     this.element.addEventListener("dragover", (event: DragEvent) => {
       this.onDragOver(event);
     });
+
     this.element.addEventListener("drop", (event: DragEvent) => {
       this.onDrop(event);
     });
